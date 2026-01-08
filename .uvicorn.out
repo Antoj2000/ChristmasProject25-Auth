@@ -1,0 +1,81 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\johns\\OneDrive - Atlantic TU\\CICD3\\DPDProject\\AuthCICD']
+INFO:     Uvicorn running on http://0.0.0.0:8004 (Press CTRL+C to quit)
+INFO:     Started reloader process [111896] using StatReload
+INFO:     Started server process [133980]
+INFO:     Waiting for application startup.
+2026-01-07 23:30:29,354 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-01-07 23:30:29,354 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("credentials")
+2026-01-07 23:30:29,354 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-01-07 23:30:29,355 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("credentials")
+2026-01-07 23:30:29,355 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-01-07 23:30:29,357 INFO sqlalchemy.engine.Engine 
+CREATE TABLE credentials (
+	id INTEGER NOT NULL, 
+	account_id INTEGER NOT NULL, 
+	account_no VARCHAR(6) NOT NULL, 
+	email VARCHAR(100) NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+2026-01-07 23:30:29,357 INFO sqlalchemy.engine.Engine [no key 0.00028s] ()
+2026-01-07 23:30:29,364 INFO sqlalchemy.engine.Engine CREATE UNIQUE INDEX ix_credentials_account_id ON credentials (account_id)
+2026-01-07 23:30:29,364 INFO sqlalchemy.engine.Engine [no key 0.00024s] ()
+2026-01-07 23:30:29,369 INFO sqlalchemy.engine.Engine CREATE UNIQUE INDEX ix_credentials_account_no ON credentials (account_no)
+2026-01-07 23:30:29,369 INFO sqlalchemy.engine.Engine [no key 0.00018s] ()
+2026-01-07 23:30:29,373 INFO sqlalchemy.engine.Engine CREATE UNIQUE INDEX ix_credentials_email ON credentials (email)
+2026-01-07 23:30:29,374 INFO sqlalchemy.engine.Engine [no key 0.00019s] ()
+2026-01-07 23:30:29,378 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Application startup complete.
+INFO:     127.0.0.1:59403 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59403 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59403 - "GET /health HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'app\worker.py'. Reloading...
+ INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [133980]
+INFO:     Started server process [98428]
+INFO:     Waiting for application startup.
+2026-01-07 23:59:02,096 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-01-07 23:59:02,097 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("credentials")
+2026-01-07 23:59:02,097 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-01-07 23:59:02,098 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'app\worker.py'. Reloading...
+ INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [98428]
+INFO:     Started server process [113520]
+INFO:     Waiting for application startup.
+2026-01-08 00:00:40,347 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-01-08 00:00:40,347 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("credentials")
+2026-01-08 00:00:40,347 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-01-08 00:00:40,348 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'app\worker.py'. Reloading...
+ INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [113520]
+INFO:     Started server process [133676]
+INFO:     Waiting for application startup.
+2026-01-08 00:10:54,286 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-01-08 00:10:54,286 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("credentials")
+2026-01-08 00:10:54,286 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-01-08 00:10:54,287 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'app\worker.py'. Reloading...
+ INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [133676]
+INFO:     Started server process [132000]
+INFO:     Waiting for application startup.
+2026-01-08 00:12:20,606 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-01-08 00:12:20,606 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("credentials")
+2026-01-08 00:12:20,606 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-01-08 00:12:20,606 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Application startup complete.
