@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from .database import SessionLocal
 from .models import CredentialsDB
-from .schemas import AccountCreatedEvent
+from .schemas import AccountCreatedEvent, AccountDeletedEvent
 
 RABBIT_URL = os.getenv("RABBIT_URL")
 EXCHANGE_NAME = "accounts_topic"
@@ -34,6 +34,17 @@ def save_credentials(evt: AccountCreatedEvent) -> None:
     finally:
         db.close()
 
+def delete_credentials(evt: AccountDeletedEvent) -> None:
+    db: Session = SessionLocal()
+    try:
+        cred = db.query(CredentialsDB).filter_by(account_id=evt.account_id).first()
+
+        if cred:
+            db.delete(cred)
+            db.commit()
+    finally:
+        db.close()
+
 async def main():
     conn = await aio_pika.connect_robust(RABBIT_URL)
     ch = await conn.channel()
@@ -41,17 +52,25 @@ async def main():
     ex = await ch.declare_exchange(EXCHANGE_NAME, aio_pika.ExchangeType.TOPIC, durable=True)
 
     queue = await ch.declare_queue("auth_credentials_queue", durable=True)
-    await queue.bind(ex, routing_key="accounts.created")
+    await queue.bind(ex, routing_key="accounts.*")
 
-    print("Listening for account events (routing key: 'accounts.created')...")
+    print("Listening for account events (routing key: 'accounts.*')...")
 
     async with queue.iterator() as q:
         async for msg in q:
             async with msg.process():
                 data = json.loads(msg.body)
-                evt = AccountCreatedEvent.model_validate(data)
-                save_credentials(evt)
-                print("Stored credentials for:", evt.account_no, evt.email)
+                routing_key = msg.routing_key
+
+                if routing_key == "accounts.created":
+                    evt = AccountCreatedEvent.model_validate(data)
+                    save_credentials(evt)
+                    print("Stored credentials for:", evt.account_no, evt.email)
+
+                elif routing_key == "accounts.deleted":
+                    evt = AccountDeletedEvent.model_validate(data)
+                    delete_credentials(evt)
+                    print("Deleted credentials for:", evt.account_no)
 
 
 if __name__ == "__main__":
