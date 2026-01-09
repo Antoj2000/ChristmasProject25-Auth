@@ -16,4 +16,4 @@ class AccountCreatedEvent(BaseModel):
     account_no: str = Field(..., min_length=6, max_length=6)
     email: EmailStr
     # This will become password_hash later
-    password: str
+    password_hash: str
