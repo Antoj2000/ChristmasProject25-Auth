@@ -47,7 +47,7 @@ def issue_token(payload: TokenRequest, db: Session = Depends(get_db)):
     )
     cred = db.execute(stmt).scalar_one_or_none()
 
-    if not cred or not verify_password(payload.password, cred.password):
+    if not cred or not verify_password(payload.password, cred.password_hash):
         raise HTTPException(
             status_code=401,
             detail="Invalid credentials",

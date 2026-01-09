@@ -19,14 +19,14 @@ def save_credentials(evt: AccountCreatedEvent) -> None:
         if existing:
             existing.account_no = evt.account_no
             existing.email = str(evt.email)
-            existing.password = evt.password  
+            existing.password_hash = evt.password_hash  
         else:
             db.add(
                 CredentialsDB(
                     account_id=evt.account_id,
                     account_no=evt.account_no,
                     email=str(evt.email),
-                    password=evt.password,
+                    password_hash=evt.password_hash,
                 )
             )
 

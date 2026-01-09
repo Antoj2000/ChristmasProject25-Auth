@@ -13,6 +13,6 @@ class CredentialsDB(Base):
      account_id: Mapped[int] = mapped_column(Integer, unique=True, nullable=False, index=True)
      account_no: Mapped[str] = mapped_column(String(6), unique=True, nullable=False, index=True)
      email: Mapped[str] = mapped_column(String(100), unique=True, nullable=False, index=True)
-     #Integrate bcrypt later on
-     #password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
-     password: Mapped[str] = mapped_column(String(255), nullable=False)
+     
+     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+     #password: Mapped[str] = mapped_column(String(255), nullable=False)

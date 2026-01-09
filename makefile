@@ -2,6 +2,7 @@
 
 APP = app.main:app
 PID_FILE = .uvicorn.pid
+WORKER_PID = .worker.pid
 
 install: 
 	pip install -r requirements.txt
@@ -13,7 +14,6 @@ start:
 	nohup python -m uvicorn $(APP) --host 0.0.0.0 --port 8004 --reload \
 	 > .uvicorn.out 2>&1 & echo $$! > $(PID_FILE)
 	@echo "Uvicorn started (PID=$$(cat $(PID_FILE))) on http://localhost:8004" 
-	
 
 stop:
 	@if [ -f $(PID_FILE) ]; then \
